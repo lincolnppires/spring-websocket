@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <label>Press start to connect and stop to disconnect :</label>
+    </div>
+    <div style="margin-top: 5px;">
+        <button id="button-start" type="button" class="btn btn-primary">
+            Start
+        </button>
+        <button id="button-stop" type="button" class="btn btn-danger">
+            Stop
+        </button>
+    </div>
+    <div style="margin-top: 15px;">
+        <p id="infotext" class="text-info">You are not connected</p>
+    </div>
+    <div id="input-group" class="input-group mb-3" >
+        <input
+                id= "message-input"
+                type="text"
+                class="form-control"
+                placeholder="Enter a message here"
+                aria-describedby="button-addon2"
+        />
+        <div class="input-group-append">
+            <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    id="button-send"
+            >
+                Send
+            </button>
+        </div>
+    </div>
+    <p id="message" class="text-success"></p>
+</div>
+</body>
+</html>
