@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  rabbitmq:
+    image: "rabbit-stomp"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "61613:61613"
+  redis:
+    container_name: redis-demo
+    image: redis
+    ports:
+      - "6379:6379"
+
+
+
+
