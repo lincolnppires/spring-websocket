@@ -13,7 +13,7 @@ import websocket.rabbit.domain.InputMessage
  */
 
 @RestController
-@RequestMapping(value = ["query"])
+@RequestMapping(value = ["event"])
 class PublishQueryController(private val rabbitTemplate: RabbitTemplate) {
 
     @Value("\${websocket.exchange.messages}")
