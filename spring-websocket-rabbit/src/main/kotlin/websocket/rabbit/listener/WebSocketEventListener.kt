@@ -10,7 +10,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor
 import org.springframework.web.socket.messaging.SessionConnectedEvent
 import org.springframework.web.socket.messaging.SessionDisconnectEvent
 import org.springframework.web.socket.messaging.SessionSubscribeEvent
-import websocket.rabbit.domain.OutputMessage
+import websoket.core.domain.OutputMessage
 import java.time.LocalDateTime
 
 /**
@@ -32,25 +32,25 @@ class WebSocketEventListener {
 
         if (session != null) {
             val msg = OutputMessage(customerId = user!!.name,
-                    message = "NEW_SESSION_${session}_FOR_USER_${user!!.name}",
+                    message = "NEW_SESSION_${session}_FOR_USER_${user.name}",
                     dateTime = LocalDateTime.now()
             )
             logger.info(msg.message)
             messagingTemplate!!.convertAndSend("/topic/sendMessage", msg)
-            messagingTemplate!!.convertAndSendToUser(user.name,"/queue/sendMessage", "NEW_SESSION_${session}" +
-                    "_FOR_YOUR_USER_${user!!.name}")
+            messagingTemplate.convertAndSendToUser(user.name,"/queue/sendMessage", "NEW_SESSION_${session}" +
+                    "_FOR_YOUR_USER_${user.name}")
         }
     }
 
     @EventListener
     fun handleWebSocketSbscribe(event: SessionSubscribeEvent){
-        val headerAccessor = StompHeaderAccessor.wrap(event!!.message)
+        val headerAccessor = StompHeaderAccessor.wrap(event.message)
         val session = headerAccessor.sessionId;
         val user = headerAccessor.user
 
         if (session != null) {
             val msg = OutputMessage(customerId = user!!.name,
-                    message = "SUBSCRIBE_USER_${user!!.name}_DESTINATION_${headerAccessor.destination.toString()}",
+                    message = "SUBSCRIBE_USER_${user.name}_DESTINATION_${headerAccessor.destination.toString()}",
                     dateTime = LocalDateTime.now()
             )
             logger.info(msg.message)
@@ -63,16 +63,15 @@ class WebSocketEventListener {
         val headerAccessor = StompHeaderAccessor.wrap(event.message)
         val session = headerAccessor.sessionId;
         val user = headerAccessor.user
-        val command = headerAccessor.command
 
         if (session != null) {
             val msg = OutputMessage(customerId = user!!.name,
-                    message = "END_OF_SESSION_${session}_ASSOCIATED_WITH_USER_${user!!.name}",
+                    message = "END_OF_SESSION_${session}_ASSOCIATED_WITH_USER_${user.name}",
                     dateTime = LocalDateTime.now()
             )
             logger.info(msg.message)
             messagingTemplate!!.convertAndSend("/topic/sendMessage", msg)
-            messagingTemplate!!.convertAndSendToUser(user.name,"/queue/sendMessage", "bye bye ${user!!.name}")
+            messagingTemplate.convertAndSendToUser(user.name,"/queue/sendMessage", "bye bye ${user.name}")
         }
     }
 }

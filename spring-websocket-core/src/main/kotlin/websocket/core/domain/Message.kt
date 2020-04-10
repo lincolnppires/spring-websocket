@@ -1,6 +1,5 @@
-package websoket.redis.domain
+package websoket.core.domain
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import java.io.Serializable
 import java.time.LocalDateTime
 
@@ -9,9 +8,9 @@ import java.time.LocalDateTime
  * @author lincoln.pires
  */
 
-data class InputMessage @JsonCreator constructor (
-        val customerId: String,
-        val message: String
+data class InputMessage (
+        var customerId: String,
+        var message: String
 ): Serializable
 
 data class OutputMessage(

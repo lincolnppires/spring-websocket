@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.listener.ChannelTopic
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import websoket.redis.domain.InputMessage
+import websoket.core.domain.InputMessage
 
 /**
  * @author lincoln.pires

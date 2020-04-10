@@ -7,7 +7,7 @@ import org.springframework.data.redis.connection.Message
 import org.springframework.data.redis.connection.MessageListener
 import org.springframework.messaging.simp.SimpMessageSendingOperations
 import org.springframework.stereotype.Component
-import websoket.redis.domain.InputMessage
+import websoket.core.domain.InputMessage
 
 /**
  * @author lincoln.pires

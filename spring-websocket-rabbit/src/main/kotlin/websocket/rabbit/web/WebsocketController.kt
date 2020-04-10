@@ -4,8 +4,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.messaging.simp.annotation.SendToUser
 import org.springframework.stereotype.Controller
-import websocket.rabbit.domain.InputMessage
-import websocket.rabbit.domain.OutputMessage
+import websoket.core.domain.InputMessage
+import websoket.core.domain.OutputMessage
 import java.time.LocalDateTime
 
 

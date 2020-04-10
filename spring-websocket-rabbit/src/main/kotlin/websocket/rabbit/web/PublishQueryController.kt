@@ -6,7 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import websocket.rabbit.domain.InputMessage
+import websoket.core.domain.InputMessage
 
 /**
  * @author lincoln.pires
