@@ -25,10 +25,11 @@
 	</properties>
 
 	<modules>
-		<module>spring-websocket-rabbit</module>
-		<module>spring-websocket-redis</module>
 		<module>spring-websocket-core</module>
 		<module>spring-websocket-client</module>
+		<module>spring-websocket-send-event</module>
+		<module>spring-websocket-rabbit</module>
+		<module>spring-websocket-redis</module>
 	</modules>
 
 </project>
