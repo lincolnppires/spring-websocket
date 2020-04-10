@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Lazy
 import org.springframework.data.redis.connection.MessageListener
+import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
@@ -29,19 +30,11 @@ class RedisConfig (@Lazy val messageListener: MessageListener){
     @Value("\${spring.redis.topic}")
     lateinit var redisTopic: String
 
-    @Bean
-    fun jedisConnectionFactory(): JedisConnectionFactory {
-        val config = RedisStandaloneConfiguration(redisHost, redisPort.toInt())
-        val jedisClientConfiguration = JedisClientConfiguration.builder().usePooling().build()
-        val factory = JedisConnectionFactory(config, jedisClientConfiguration)
-        factory.afterPropertiesSet()
-        return factory
-    }
 
     @Bean
-    fun redisTemplate(): RedisTemplate<String, Any> {
+    fun redisTemplate(redisConnectionFactory: RedisConnectionFactory): RedisTemplate<String, Any> {
         val redisTemplate: RedisTemplate<String, Any> = RedisTemplate()
-        redisTemplate.setConnectionFactory(jedisConnectionFactory())
+        redisTemplate.setConnectionFactory(redisConnectionFactory)
         redisTemplate.valueSerializer = GenericJackson2JsonRedisSerializer()
         return redisTemplate
     }
@@ -53,9 +46,9 @@ class RedisConfig (@Lazy val messageListener: MessageListener){
     fun newMessageListener(): MessageListenerAdapter = MessageListenerAdapter(messageListener)
 
     @Bean
-    fun redisContainer(): RedisMessageListenerContainer {
+    fun redisContainer(redisConnectionFactory: RedisConnectionFactory): RedisMessageListenerContainer {
         val container = RedisMessageListenerContainer()
-        container.setConnectionFactory(jedisConnectionFactory())
+        container.setConnectionFactory(redisConnectionFactory)
         container.addMessageListener(newMessageListener(), topic())
         return container
     }
