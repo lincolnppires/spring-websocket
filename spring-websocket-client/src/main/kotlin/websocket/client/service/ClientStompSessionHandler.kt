@@ -1,12 +1,14 @@
 package websocket.client.service
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.messaging.simp.stomp.StompCommand
 import org.springframework.messaging.simp.stomp.StompHeaders
 import org.springframework.messaging.simp.stomp.StompSession
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter
-import websoket.core.domain.OutputMessage
+import websoket.core.domain.InputMessage
+import java.io.Serializable
 import java.lang.reflect.Type
 
 /**
@@ -23,17 +25,16 @@ class ClientStompSessionHandler: StompSessionHandlerAdapter() {
     }
 
     override fun handleException(session: StompSession, command: StompCommand?, headers: StompHeaders, payload: ByteArray, exception: Throwable) {
-        val msg: OutputMessage = payload as OutputMessage
-        logger.error("ERROR_RECEIVED_$msg")
-        logger.error("EXCEPTION", exception)
+        //val msg: String = payload as String
+        logger.error("ERROR_NO_SUITABLE_CONVERTER_FOR_PAYLOAD_TYPE")
     }
 
     override fun getPayloadType(headers: StompHeaders): Type {
-        return OutputMessage::class.java
+        return InputMessage::class.java
     }
 
     override fun handleFrame(headers: StompHeaders, payload: Any?) {
-        val msg: OutputMessage = payload as OutputMessage
+        val msg: InputMessage = payload as InputMessage
         logger.info("HANDLE_FRAME_PAYLOAD_$msg")
     }
 

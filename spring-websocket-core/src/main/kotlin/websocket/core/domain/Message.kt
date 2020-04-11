@@ -7,10 +7,9 @@ import java.time.LocalDateTime
 /**
  * @author lincoln.pires
  */
-
 data class InputMessage (
-        var customerId: String,
-        var message: String
+        val customerId: String,
+        val message: String
 ): Serializable
 
 data class OutputMessage(

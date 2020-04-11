@@ -1,6 +1,7 @@
 version: '3.5'
 services:
   rabbitmq:
+    container_name: rabbit-stomp
     image: "rabbit-stomp"
     ports:
       - "5672:5672"

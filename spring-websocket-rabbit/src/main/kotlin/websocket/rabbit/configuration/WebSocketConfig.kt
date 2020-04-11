@@ -26,6 +26,9 @@ class WebSocketConfig : WebSocketMessageBrokerConfigurer {
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
         registry.addEndpoint("/event-websocket")
                 .setHandshakeHandler(CustomHandshakeHandler())
+                .setAllowedOrigins("*")
+        registry.addEndpoint("/event-websocket")
+                .setHandshakeHandler(CustomHandshakeHandler())
                 .setAllowedOrigins("*").withSockJS()
     }
 }

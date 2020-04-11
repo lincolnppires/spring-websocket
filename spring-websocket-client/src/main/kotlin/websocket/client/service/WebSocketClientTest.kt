@@ -1,6 +1,6 @@
 package websocket.client.service
 
-import org.springframework.messaging.converter.MappingJackson2MessageConverter
+import org.springframework.messaging.converter.GenericMessageConverter
 import org.springframework.messaging.simp.stomp.StompSessionHandler
 import org.springframework.web.socket.WebSocketHttpHeaders
 import org.springframework.web.socket.client.WebSocketClient
@@ -16,7 +16,8 @@ class WebSocketClientTest(customerId: String) {
     val stompClient = WebSocketStompClient(client)
 
     init {
-        stompClient.messageConverter = MappingJackson2MessageConverter()
+        //stompClient.messageConverter = MappingJackson2MessageConverter()
+        stompClient.messageConverter = GenericMessageConverter()
         val sessionHandler: StompSessionHandler = ClientStompSessionHandler()
         val handshakeHeaders = WebSocketHttpHeaders()
         handshakeHeaders.add("customerid", customerId)
